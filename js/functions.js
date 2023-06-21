@@ -1,22 +1,27 @@
-const checkStringLength = (string, length) => (string.length <= length);
+const isNormalTime = (startOfDay, endOfDay, startOfMeeting, meetingDuration) => {
 
-const isPalindrome = function (str) {
-  let noSpaces = str.replaceAll(' ', '');
-  let reverse = noSpaces.split('').reverse().join('');
-  return (noSpaces.toLowerCase() === reverse.toLowerCase());
-};
+  const getNumberFromTime = (arg) => {
+    let newNumber = (arg.split(':'));
 
-const extractNumbers = function (string) {
-  let newString = '';
-  for (let i = 0; i < string.length; i++) {
-    let sym = parseInt(string[i], 10);
-    if (!isNaN(sym)) {
-      newString += string[i];
+    if (newNumber[1].length < 2) {
+      newNumber[1] = +(newNumber[1]) * 10;
     }
+
+    let minutes = (+newNumber[0] * 60) + (+newNumber[1]);
+    return minutes;
   }
-  if (newString > 0) {
-    return newString;
+
+  const newStartOfDay = getNumberFromTime(startOfDay);
+  const newEndOfday = getNumberFromTime(endOfDay);
+  const newStartOfMeeting = getNumberFromTime(startOfMeeting);
+  const endOfMeeting = newStartOfMeeting + meetingDuration;
+
+  if (newStartOfDay > newStartOfMeeting) {
+    return false;
+  } else if (newEndOfday < endOfMeeting) {
+    return false;
   } else {
-    return NaN;
+    return true;
   }
-};
+
+}
