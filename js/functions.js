@@ -16,9 +16,7 @@ const isNormalTime = (startOfDay, endOfDay, startOfMeeting, meetingDuration) => 
   const newStartOfMeeting = getNumberFromTime(startOfMeeting);
   const endOfMeeting = newStartOfMeeting + meetingDuration;
 
-  if (newStartOfDay > newStartOfMeeting) {
-    return false;
-  } else if (newEndOfday < endOfMeeting) {
+  if (newStartOfDay > newStartOfMeeting || newEndOfday < endOfMeeting) {
     return false;
   } else {
     return true;

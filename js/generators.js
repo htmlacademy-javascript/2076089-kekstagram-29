@@ -1,8 +1,6 @@
 import { getRandomNumber, idCommentGenerator, idGenerator, urlGenerator } from "./random-functions";
 import { getNames, getMessages } from "./data";
 
-
-
 // Генератор текста для комментариев
 const messageGenerator = function () {
   let message = getMessages[getRandomNumber(0, getMessages.length -1)];
@@ -27,7 +25,7 @@ const getPhotoDesription = function () {
   photoId: idGenerator(),
   photoUrl: `${urlGenerator()}.jpg`,
   description: 'Очень классная фотография',
-  LikesNumber: getRandomNumber(15, 200),
+  likesNumber: getRandomNumber(15, 200),
   getComments: Array.from({length: getRandomNumber(0, 30)}, commentGenerator)
   }
 }
