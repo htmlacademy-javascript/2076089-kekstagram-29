@@ -20,10 +20,9 @@ const getUniqueNumber = function (min, max) {
   };
 }
 
-const idCommentGenerator = () => getUniqueNumber(0, 50);
+const idCommentGenerator = getUniqueNumber(0, 50);
 
-const idGenerator = () => getUniqueNumber(0, 25);
-
-const urlGenerator = () => getUniqueNumber(0, 25);
+let idGenerator = () => getUniqueNumber(0, 25);
+let urlGenerator = getUniqueNumber(1, 25);
 
 export {getRandomNumber, getUniqueNumber, idCommentGenerator, idGenerator, urlGenerator};
