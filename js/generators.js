@@ -1,11 +1,16 @@
+<<<<<<< HEAD
 import { getRandomNumber, idCommentGenerator, idGenerator, urlGenerator } from "./random-functions";
 import { getNames, getMessages } from "./data";
+=======
+import { getRandomNumber, idCommentGenerator, idGenerator, urlGenerator } from "./random-functions.js";
+import { getNames, getMessages } from "./data.js";
+>>>>>>> ad1b770 (full photo added + bugs fixed)
 
 // Генератор текста для комментариев
 const messageGenerator = function () {
-  let message = getMessages[getRandomNumber(0, getMessages.length -1)];
+  let message = getMessages()[getRandomNumber(0, getMessages().length -1)];
   if (getRandomNumber(1, 2) === 2) {
-    message = getMessages[getRandomNumber(0, messages.length -1)] + ' ' + messages[getRandomNumber(0, messages.length -1)];
+    message += ' ' + getMessages()[getRandomNumber(0, getMessages.length -1)];
   }
   return message;
 }
@@ -16,18 +21,23 @@ return {
   id: idCommentGenerator(),
   avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
   message: messageGenerator(),
-  name: getNames[getRandomNumber(0, getNames.length - 1)]
+  name: getNames()[getRandomNumber(0, getNames.length - 1)]
 }
 }
 // Генератор описания фото
-const getPhotoDesription = function () {
+const getPhotoDescription = function () {
   return {
-  photoId: idGenerator(),
-  photoUrl: `${urlGenerator()}.jpg`,
+  id: idGenerator(),
+  url: `photos/${urlGenerator()}.jpg`,
   description: 'Очень классная фотография',
+<<<<<<< HEAD
   likesNumber: getRandomNumber(15, 200),
   getComments: Array.from({length: getRandomNumber(0, 30)}, commentGenerator)
+=======
+  likes: getRandomNumber(15, 200),
+  comments: Array.from({length: getRandomNumber(0, 30)}, commentGenerator),
+>>>>>>> ad1b770 (full photo added + bugs fixed)
   }
 }
 
-export {getPhotoDesription};
+export {getPhotoDescription};
