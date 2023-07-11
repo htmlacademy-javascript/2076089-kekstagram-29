@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import { getRandomNumber, idCommentGenerator, idGenerator, urlGenerator } from "./random-functions";
-import { getNames, getMessages } from "./data";
-=======
 import { getRandomNumber, idCommentGenerator, idGenerator, urlGenerator } from "./random-functions.js";
 import { getNames, getMessages } from "./data.js";
->>>>>>> ad1b770 (full photo added + bugs fixed)
 
 // Генератор текста для комментариев
 const messageGenerator = function () {
@@ -30,13 +25,8 @@ const getPhotoDescription = function () {
   id: idGenerator(),
   url: `photos/${urlGenerator()}.jpg`,
   description: 'Очень классная фотография',
-<<<<<<< HEAD
-  likesNumber: getRandomNumber(15, 200),
-  getComments: Array.from({length: getRandomNumber(0, 30)}, commentGenerator)
-=======
   likes: getRandomNumber(15, 200),
   comments: Array.from({length: getRandomNumber(0, 30)}, commentGenerator),
->>>>>>> ad1b770 (full photo added + bugs fixed)
   }
 }
 
