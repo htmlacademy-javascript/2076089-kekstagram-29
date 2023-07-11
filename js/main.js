@@ -1,4 +1,8 @@
-import { getPhotoDesription } from "./generators";
+import { getPhotoDescription } from "./generators.js";
+import { renderGallery } from "./gallery.js";
 
-//Массив с описаниями фотографий
-const getPhotoDescriptions = Array.from({length: 25}, getPhotoDesription);
+const photoDescriptions = Array.from({length: 25}, getPhotoDescription);
+
+renderGallery(photoDescriptions);
+
+
