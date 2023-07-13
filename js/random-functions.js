@@ -1,9 +1,9 @@
-// Генератор рандомного числа
+import { getData } from "./data.js";
+
 const getRandomNumber = function (min, max) {
-  return Math.floor(Math.random() * (max - min +1 )) + min;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// Генератор уникального рандомного числа
 const getUniqueNumber = function (min, max) {
   const previousValues = [];
 
@@ -20,9 +20,12 @@ const getUniqueNumber = function (min, max) {
   };
 }
 
-const idCommentGenerator = getUniqueNumber(0, 50);
+const idCommentGenerator = getUniqueNumber(0, getData.COMMENTS_COUNT);
 
-let idGenerator = () => getUniqueNumber(0, 25);
-let urlGenerator = getUniqueNumber(1, 25);
+let idGenerator = () => getUniqueNumber(0, getData.PHOTOS_COUNT);
+let urlGenerator = getUniqueNumber(1, getData.PHOTOS_COUNT);
 
-export {getRandomNumber, getUniqueNumber, idCommentGenerator, idGenerator, urlGenerator};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+
+export {getRandomNumber, getUniqueNumber, idCommentGenerator, idGenerator, urlGenerator, isEscapeKey};
