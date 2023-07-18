@@ -27,4 +27,9 @@ const increaseScale = () => {
   previewImage.style.transform = `scale(${scale / 100})`;
 }
 
-export {downScale, increaseScale};
+const initScale = () => {
+  scaleControlValue.value = `${MAX_SCALE}%`;
+  previewImage.style.transform = `scale(${MAX_SCALE / 100})`;
+}
+
+export {downScale, increaseScale, initScale};

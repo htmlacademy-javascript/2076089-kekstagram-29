@@ -25,7 +25,5 @@ const idCommentGenerator = getUniqueNumber(0, getData.COMMENTS_COUNT);
 let idGenerator = () => getUniqueNumber(0, getData.PHOTOS_COUNT);
 let urlGenerator = getUniqueNumber(1, getData.PHOTOS_COUNT);
 
-const isEscapeKey = (evt) => evt.key === 'Escape';
 
-
-export {getRandomNumber, getUniqueNumber, idCommentGenerator, idGenerator, urlGenerator, isEscapeKey};
+export {getRandomNumber, getUniqueNumber, idCommentGenerator, idGenerator, urlGenerator};

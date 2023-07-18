@@ -20,14 +20,10 @@ const errorPristine = {
   errorTextClass: 'img-upload__field-wrapper--error'
 }
 
-const isInputFocus = () => {
-  if (document.activeElement === tagsInput || document.activeElement === commentInput) {
-    return true;
-  }
-};
+const isInputFocus = () => document.activeElement === tagsInput || document.activeElement === commentInput;
 
 // Из наборов хэштегов сделать массив
-const hashtagsList = (tags) => tags.trim().split(' ');
+const hashtagsList = (tags) => tags.trim().split(/\s+/);
 
 // Проверка есть ли хэштег в массиве
 const validateRepeatedHastags = (value) => {
@@ -40,38 +36,34 @@ const validateRepeatedHastags = (value) => {
 const validateNumberOfHashtags = (value) => hashtagsList(value).length <= MAX_HASHTAGS;
 
 // Проверка валидности
-const validateInvalideTag = (value) => {
-  const filterArray = hashtagsList(value).filter(element => VALID_HASHTAG.test(element));
-  return hashtagsList(value).toString() === filterArray.toString();
-};
+const validateInvalideTag = (value) => hashtagsList(value).every((element) => VALID_HASHTAG.test(element));
 
 const pristineForm = new Pristine(uploadForm, errorPristine);
 
 const setValidator = () => {
+  pristineForm.addValidator(
+    tagsInput,
+    validateNumberOfHashtags,
+    ERROR_TEXT.invalidCount,
+    3,
+    true
+  );
 
-pristineForm.addValidator(
-  tagsInput,
-  validateRepeatedHastags,
-  ERROR_TEXT.notUnique,
-  1,
-  true
-);
+  pristineForm.addValidator(
+    tagsInput,
+    validateRepeatedHastags,
+    ERROR_TEXT.notUnique,
+    1,
+    true
+  );
 
-pristineForm.addValidator(
-  tagsInput,
-  validateInvalideTag,
-  ERROR_TEXT.invalidHashtag,
-  2,
-  true
-);
-
-pristineForm.addValidator(
-  tagsInput,
-  validateNumberOfHashtags,
-  ERROR_TEXT.invalidCount,
-  3,
-  true
-);
+  pristineForm.addValidator(
+    tagsInput,
+    validateInvalideTag,
+    ERROR_TEXT.invalidHashtag,
+    2,
+    true
+  );
 }
 
 submitButton.addEventListener('submit', (evt) => {
@@ -79,5 +71,8 @@ submitButton.addEventListener('submit', (evt) => {
   pristineForm.validate();
 });
 
+const resetPristine = () => {
+  pristineForm.reset();
+};
 
-export {isInputFocus, setValidator};
+export {isInputFocus, setValidator, resetPristine};

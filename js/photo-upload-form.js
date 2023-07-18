@@ -1,7 +1,7 @@
-import { isEscapeKey } from "./random-functions.js";
-import { downScale, increaseScale } from "./photo-scale.js";
-import { isInputFocus } from "./validation.js";
-import { onSliderUpdate } from "./photo-slider.js";
+import { IS_ESCAPE_KEY } from "./data.js";
+import { downScale, increaseScale, initScale } from "./photo-scale.js";
+import { isInputFocus, setValidator, resetPristine } from "./validation.js";
+import { sliderUpdateChange, initSlider } from "./photo-slider.js";
 // Поля формы
 const uploadForm = document.querySelector('.img-upload__form');
 const imgUploadForm = uploadForm.querySelector('.img-upload__input');
@@ -15,12 +15,12 @@ const buttonScaleControlBigger = imgUploadFieldset.querySelector('.scale__contro
 
 // Эффекты
 const imgEffectsContainer = uploadForm.querySelector('.img-upload__effect-level');
-const sliderElement = imgEffectsContainer.querySelector('.effect-level__slider');
+
 
 const onKeyDown = (evt) => {
-  if (isEscapeKey(evt) && !(isInputFocus())) {
+  if (IS_ESCAPE_KEY(evt) && !(isInputFocus())) {
     evt.preventDefault();
-    hideForm();
+    onClickHideForm();
   }
 }
 
@@ -30,23 +30,24 @@ const onChangeOpenForm = () => {
   document.addEventListener('keydown', onKeyDown);
 }
 
-imgUploadForm.addEventListener('change', onChangeOpenForm);
-
-const hideForm = () => {
-  imgUploadForm.value = '';
+const onClickHideForm = () => {
+  uploadForm.reset();
+  initScale();
+  initSlider();
+  resetPristine();
   hiddenPhotoForm.classList.add('hidden');
   document.body.classList.remove('modal-open');
+  document.removeEventListener('keydown', onKeyDown);
 }
 
-const onClickHideForm = () => hideForm();
+const initUploadForm = () => {
+  setValidator();
+  imgUploadForm.addEventListener('change', onChangeOpenForm);
+  resetButton.addEventListener('click', onClickHideForm);
+  buttonScaleControlSmaller.addEventListener('click', downScale)
+  buttonScaleControlBigger.addEventListener('click', increaseScale)
+  imgEffectsContainer.classList.add('hidden');
+  sliderUpdateChange();
+}
 
-resetButton.addEventListener('click', onClickHideForm);
-
-buttonScaleControlSmaller.addEventListener('click', downScale)
-buttonScaleControlBigger.addEventListener('click', increaseScale)
-
-imgEffectsContainer.classList.add('hidden');
-
-sliderElement.noUiSlider.on('update', onSliderUpdate);
-
-
+export {initUploadForm};

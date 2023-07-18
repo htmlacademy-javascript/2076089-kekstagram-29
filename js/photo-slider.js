@@ -151,22 +151,23 @@ const effectButtons = imgEffectsButtons.querySelectorAll('input[type="radio"]');
 noUiSlider.create(sliderElement, EFFECTS_VALUES["none"].options);
 
 let theme = {};
-
-for (let button of effectButtons) {
-  button.addEventListener('change', (evt) => {
-    if (evt.target.checked) {
-      imgEffectsContainer.classList.remove('hidden');
-      sliderElement.removeAttribute('disabled');
-      theme = EFFECTS_VALUES[button.value];
-      previewImage.style.filter = `${theme.filter}(${theme.options.start}${theme.options.suffix})`;
-      sliderElement.noUiSlider.updateOptions(theme.options);
-    }
-    if (evt.target.value === "none") {
-      imgEffectsContainer.classList.add('hidden');
-      sliderElement.setAttribute('disabled', true);
-      previewImage.style.filter = '';
-    }
-    })
+const effectChanger = () => {
+  for (let button of effectButtons) {
+    button.addEventListener('change', (evt) => {
+      if (evt.target.checked) {
+        imgEffectsContainer.classList.remove('hidden');
+        sliderElement.removeAttribute('disabled');
+        theme = EFFECTS_VALUES[button.value];
+        previewImage.style.filter = `${theme.filter}(${theme.options.start}${theme.options.suffix})`;
+        sliderElement.noUiSlider.updateOptions(theme.options);
+      }
+      if (evt.target.value === "none") {
+        imgEffectsContainer.classList.add('hidden');
+        sliderElement.setAttribute('disabled', true);
+        previewImage.style.filter = '';
+      }
+      })
+  }
 }
 
 const onSliderUpdate = () => {
@@ -174,4 +175,15 @@ const onSliderUpdate = () => {
   previewImage.style.filter = `${theme.filter}(${inputEffectValue.value}${theme.options.suffix})`;
 }
 
-export {onSliderUpdate}
+const sliderUpdateChange = () => {
+  effectChanger();
+  sliderElement.noUiSlider.on('update', onSliderUpdate);
+}
+
+const initSlider = () => {
+  imgEffectsContainer.classList.add('hidden');
+  sliderElement.setAttribute('disabled', true);
+  previewImage.style.filter = '';
+}
+
+export {sliderUpdateChange, initSlider}
