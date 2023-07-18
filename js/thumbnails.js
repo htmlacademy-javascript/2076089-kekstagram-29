@@ -23,7 +23,6 @@ const renderThumbnails = (pictures) => {
   const pictureListFragment = document.createDocumentFragment();
   pictures.forEach ((picture) => {
     const thumbnail = createThumbNail(picture);
-
     thumbnail.addEventListener('click', (evt) => {
       evt.preventDefault();
       showBigPicture(picture);

@@ -33,4 +33,8 @@ const getData = {
   MAX_LIKES_COUNT : 200
 }
 
-export {getData};
+const IS_ESCAPE_KEY = (evt) => evt.key === 'Escape';
+
+
+
+export {getData, IS_ESCAPE_KEY};

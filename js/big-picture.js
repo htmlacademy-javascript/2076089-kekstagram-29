@@ -1,4 +1,4 @@
-import { isEscapeKey } from "./random-functions.js";
+import { IS_ESCAPE_KEY } from "./data.js";
 
 const COUNT_COMMENTS_OPEN = 5;
 
@@ -60,7 +60,7 @@ const renderPictureDetails = ({url, likes, description}) => {
 };
 
 const onKeyDown = (evt) => {
-  if (isEscapeKey) {
+  if (IS_ESCAPE_KEY) {
     evt.preventDefault();
     hideBigPicture();
   }
